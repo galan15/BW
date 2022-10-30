@@ -127,7 +127,7 @@ class Item {
 
 class Scrap extends Item {
     static plnPrice = 20000;
-    static prPrice = 1500;
+    static prPrice = 1700;
 
     constructor(node, name, price) {
         super(node, name, price, []);
