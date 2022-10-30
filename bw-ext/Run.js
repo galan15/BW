@@ -6,4 +6,5 @@ Extension.instance
     .register(new Buildings_AddSummaryTable())
     .register(new Armory_LoadAllItems())
     .register(new Armory_AddSearch())
+    .register(new Rank_ShowPlayersEligibleForGettingEvolutionPoints())
     .run();

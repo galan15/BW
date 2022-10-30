@@ -19,6 +19,7 @@
         "Modules/Auction/AddPrValueColumn.js",
         "Modules/Auction/HighlightImportantAffixes.js",
         "Modules/Buildings/AddSummaryTable.js",
+        "Modules/Rank/ShowPlayersEligibleForGettingEvolutionPoints.js",
         "Modules/TownShop/AutomaticallyOpenBargains.js",
         "Modules/TownShop/HighlightPerfectItems.js",
         "Extension.js",
