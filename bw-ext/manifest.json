@@ -15,7 +15,6 @@
         "Core.js",
         "Modules/Module.js",
         "Modules/Armory/AddSearch.js",
-        "Modules/Armory/ChangeViewToTable.js",
         "Modules/Armory/LoadAllItems.js",
         "Modules/Auction/AddPrValueColumn.js",
         "Modules/Auction/HighlightImportantAffixes.js",
