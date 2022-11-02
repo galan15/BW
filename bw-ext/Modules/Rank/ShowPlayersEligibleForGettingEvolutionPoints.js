@@ -12,7 +12,6 @@ class Rank_ShowPlayersEligibleForGettingEvolutionPoints extends Module {
     execute() {
         const myCurrentLevel = this.getMyCurrentLevel();
         const myName = this.getMyName();
-        const myCurrentRankPosition = this.getMyCurrentRankPosition(myName);
 
         const enemyMinimumLevel = Math.ceil(myCurrentLevel * 0.845);
         const enemyMinimumExperience = 1000 * Math.pow(1.1, enemyMinimumLevel - 1);
@@ -30,13 +29,7 @@ class Rank_ShowPlayersEligibleForGettingEvolutionPoints extends Module {
                     return;
                 }
 
-                const enemyRankPosition = this.getRank(item);
-                if (enemyRankPosition < myCurrentRankPosition ||
-                    enemyRankPosition - myCurrentRankPosition <= 100) {
-                        item.style.color = 'green';
-                    } else {
-                        item.style.color = 'yellow';
-                    }
+                item.style.color = 'green';
             });
     }
 
@@ -56,20 +49,6 @@ class Rank_ShowPlayersEligibleForGettingEvolutionPoints extends Module {
         return document
             .querySelector('.top > .top-relativeInner > .stats-player > .me')
             .innerHTML;
-    }
-
-    getMyCurrentRankPosition(myName) {
-        const myRank = -101;
-
-        const request = new XMLHttpRequest();
-        request.open('GET', 'https://r7.bloodwars.interia.pl/?a=profile', false);
-        request.send();
-
-        const rankRowRegex = /(?<=<tr><td><b>Miejsce w rankingu<\/b><\/td><td>.*)(\d+)(?=.*<a href="\?a=rank)/g;
-        return request.response
-            .trim()
-            .replace(/\r\n\s*/g, '')
-            .match(rankRowRegex)[0];
     }
 
     getRank(item){
