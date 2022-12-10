@@ -15,6 +15,7 @@ class Auction_HighlightImportantAffixes extends Module {
             'szybkości',
             'zwierzęca', 'zwierzęcy',
             'reakcji',
+            'refleksyjny',
             'runiczna', 'runiczne', 'runiczny',
             'szamańska', 'szamańskie', 'szamański',
             'prekognicji',
@@ -23,36 +24,27 @@ class Auction_HighlightImportantAffixes extends Module {
 			'śmiercionośna', 'śmiercionośny', 'śmiercionośne',
 			'prekognicji',
 			'pasterza'
-        ].map(phrase => phrase.normalize().capitalizeEachWord());
+        ];
 
         Array.from(document.querySelectorAll('.item-link'))
             .map(node => this.itemFactory.create(node))
-            .filter(item => importantPhrases.some(phrase => item.name.includes(phrase)))
             .forEach(item => {
-                const oldName = item.name.capitalizeEachWord();
-                const oldNameWords = oldName.split(' ');
-                let newNameWords = [];
+                const itemNewNameWords = [];
 
-                oldNameWords.forEach(word => {
-                    let newWord = word;
-
-                    importantPhrases.forEach(phrase => {
-                        if (word === phrase) {
-                            newWord = HtmlElementFactory.createSpan(span => {
+                const itemWords = item.name.split(' ');
+                itemWords.forEach(word => {
+                    if (importantPhrases.some(phrase => word.localeCompare(phrase, undefined, { sensitivity: 'accent' }) === 0)) {
+                        const higlightedWord = HtmlElementFactory.createSpan(span => {
                                 span.textContent = word;
                                 span.style.color = 'limegreen';
                             }).outerHTML;
-                        }
-                    });
-
-                    newNameWords.push(newWord);
+                        itemNewNameWords.push(higlightedWord);
+                        return;
+                    }
+                    itemNewNameWords.push(word);
                 });
 
-                const newName = newNameWords.join(' ');
-                if (newName === oldName) {
-                    return;
-                }
-
+                const newName = itemNewNameWords.join(' ');
                 item.setName(newName);
             });
     }
